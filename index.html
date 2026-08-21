@@ -273,15 +273,27 @@ body {
 .asset-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 0.85rem 0;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.95rem 0;
   border-bottom: 1px solid var(--border);
   font-size: 0.9rem;
 }
 .asset-row:last-child { border-bottom: none; }
+.asset-row-main { flex: 1; min-width: 0; }
 .asset-row-name { color: var(--text-primary); font-weight: 500; }
-.asset-row-pct { color: var(--text-muted); font-size: 0.8rem; margin-left: 0.5rem; }
-.asset-row-value { font-family: 'DM Mono', monospace; color: var(--gold); }
+.asset-row-pct { color: var(--text-muted); font-size: 0.8rem; margin-left: 0.5rem; font-weight: 400; }
+.asset-row-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+  line-height: 1.5;
+}
+.asset-row-desc .segment-tag {
+  color: var(--gold-light);
+  font-weight: 500;
+}
+.asset-row-value { font-family: 'DM Mono', monospace; color: var(--gold); white-space: nowrap; padding-top: 0.1rem; }
 
 .total-bar {
   display: flex;
@@ -501,7 +513,10 @@ body {
         <div class="asset-block-total">R$ 3.000,00 · 60%</div>
       </div>
       <div class="asset-row">
-        <div><span class="asset-row-name">Tesouro Selic</span><span class="asset-row-pct">60,00%</span></div>
+        <div class="asset-row-main">
+          <div class="asset-row-name">Tesouro Selic<span class="asset-row-pct">60,00%</span></div>
+          <div class="asset-row-desc"><span class="segment-tag">Título público pós-fixado.</span> Rende atrelado à taxa Selic, com liquidez diária e risco mínimo. É a reserva de segurança e estabilidade da carteira.</div>
+        </div>
         <div class="asset-row-value">R$ 3.000,00</div>
       </div>
     </div>
@@ -513,15 +528,24 @@ body {
         <div class="asset-block-total">R$ 750,00 · 15%</div>
       </div>
       <div class="asset-row">
-        <div><span class="asset-row-name">PRIO3</span><span class="asset-row-pct">6,00%</span></div>
+        <div class="asset-row-main">
+          <div class="asset-row-name">PRIO3<span class="asset-row-pct">6,00%</span></div>
+          <div class="asset-row-desc"><span class="segment-tag">Petróleo e Gás.</span> PetroRio, produtora independente focada em revitalização de campos maduros offshore, com baixo custo de extração.</div>
+        </div>
         <div class="asset-row-value">R$ 300,00</div>
       </div>
       <div class="asset-row">
-        <div><span class="asset-row-name">GMAT3</span><span class="asset-row-pct">5,00%</span></div>
+        <div class="asset-row-main">
+          <div class="asset-row-name">GMAT3<span class="asset-row-pct">5,00%</span></div>
+          <div class="asset-row-desc"><span class="segment-tag">Varejo Alimentar / Atacarejo.</span> Grupo Mateus, rede de supermercados e atacarejo com forte presença no Norte e Nordeste do Brasil.</div>
+        </div>
         <div class="asset-row-value">R$ 250,00</div>
       </div>
       <div class="asset-row">
-        <div><span class="asset-row-name">WIZC3</span><span class="asset-row-pct">4,00%</span></div>
+        <div class="asset-row-main">
+          <div class="asset-row-name">WIZC3<span class="asset-row-pct">4,00%</span></div>
+          <div class="asset-row-desc"><span class="segment-tag">Seguros e Corretagem.</span> Wiz Co., corretora de seguros e produtos financeiros, com receita ligada a comissões e parcerias de distribuição.</div>
+        </div>
         <div class="asset-row-value">R$ 200,00</div>
       </div>
     </div>
@@ -533,19 +557,31 @@ body {
         <div class="asset-block-total">R$ 750,00 · 15%</div>
       </div>
       <div class="asset-row">
-        <div><span class="asset-row-name">XPML11</span><span class="asset-row-pct">5,00%</span></div>
+        <div class="asset-row-main">
+          <div class="asset-row-name">XPML11<span class="asset-row-pct">5,00%</span></div>
+          <div class="asset-row-desc"><span class="segment-tag">Shoppings (tijolo).</span> XP Malls, fundo com participação em shopping centers, gerando renda via aluguéis e resultado operacional dos empreendimentos.</div>
+        </div>
         <div class="asset-row-value">R$ 250,00</div>
       </div>
       <div class="asset-row">
-        <div><span class="asset-row-name">CPTS11</span><span class="asset-row-pct">4,00%</span></div>
+        <div class="asset-row-main">
+          <div class="asset-row-name">CPTS11<span class="asset-row-pct">4,00%</span></div>
+          <div class="asset-row-desc"><span class="segment-tag">Papel / Recebíveis (CRI).</span> Capitânia Securities II, fundo de recebíveis imobiliários indexados a CDI e IPCA, com foco em geração de renda mensal.</div>
+        </div>
         <div class="asset-row-value">R$ 200,00</div>
       </div>
       <div class="asset-row">
-        <div><span class="asset-row-name">PSEC11</span><span class="asset-row-pct">3,00%</span></div>
+        <div class="asset-row-main">
+          <div class="asset-row-name">PSEC11<span class="asset-row-pct">3,00%</span></div>
+          <div class="asset-row-desc"><span class="segment-tag">Papel / Recebíveis (CRI).</span> Pátria Securities, também fundo de recebíveis imobiliários, complementando a exposição a crédito imobiliário de diferentes gestoras.</div>
+        </div>
         <div class="asset-row-value">R$ 150,00</div>
       </div>
       <div class="asset-row">
-        <div><span class="asset-row-name">PVBI11</span><span class="asset-row-pct">3,00%</span></div>
+        <div class="asset-row-main">
+          <div class="asset-row-name">PVBI11<span class="asset-row-pct">3,00%</span></div>
+          <div class="asset-row-desc"><span class="segment-tag">Lajes Corporativas (tijolo).</span> VBI Prime Properties, fundo com edifícios de escritórios de alto padrão, renda via locação para empresas.</div>
+        </div>
         <div class="asset-row-value">R$ 150,00</div>
       </div>
     </div>
@@ -557,15 +593,24 @@ body {
         <div class="asset-block-total">R$ 500,00 · 10%</div>
       </div>
       <div class="asset-row">
-        <div><span class="asset-row-name">WRLD11</span><span class="asset-row-pct">6,50%</span></div>
+        <div class="asset-row-main">
+          <div class="asset-row-name">WRLD11<span class="asset-row-pct">6,50%</span></div>
+          <div class="asset-row-desc"><span class="segment-tag">Ações Globais.</span> Réplica do VT (Vanguard Total World Stock), dando exposição a milhares de empresas ao redor do mundo em um único ativo negociado na B3.</div>
+        </div>
         <div class="asset-row-value">R$ 325,00</div>
       </div>
       <div class="asset-row">
-        <div><span class="asset-row-name">USDB11</span><span class="asset-row-pct">2,00%</span></div>
+        <div class="asset-row-main">
+          <div class="asset-row-name">USDB11<span class="asset-row-pct">2,00%</span></div>
+          <div class="asset-row-desc"><span class="segment-tag">Dólar / Moeda Forte.</span> Réplica do BND, ETF de dólar que protege parte do patrimônio da desvalorização cambial do Real.</div>
+        </div>
         <div class="asset-row-value">R$ 100,00</div>
       </div>
       <div class="asset-row">
-        <div><span class="asset-row-name">GOLD11</span><span class="asset-row-pct">1,50%</span></div>
+        <div class="asset-row-main">
+          <div class="asset-row-name">GOLD11<span class="asset-row-pct">1,50%</span></div>
+          <div class="asset-row-desc"><span class="segment-tag">Ouro.</span> Réplica do IAU, ativo real historicamente usado como proteção em cenários de crise e inflação global.</div>
+        </div>
         <div class="asset-row-value">R$ 75,00</div>
       </div>
     </div>
