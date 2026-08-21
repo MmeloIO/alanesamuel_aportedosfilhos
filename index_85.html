@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aporte & Metodologia ARCA — Alane e Samuel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-deep: #0A0C1A;
+  --bg-card: #0F1225;
+  --bg-elevated: #141728;
+  --navy: #1E2761;
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --text-primary: #F0EDE6;
+  --text-muted: #8B8FA8;
+  --success: #4CAF8C;
+  --warning: #E8A83C;
+  --danger: #E85C4A;
+  --border: rgba(201,168,76,0.15);
+}
+
+body {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.section-intro {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text-muted);
+  max-width: 640px;
+  margin-bottom: 2.5rem;
+}
+
+.section-divider {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin: 1rem 0 2rem;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  background: radial-gradient(ellipse at 50% 0%, rgba(30,39,97,0.4) 0%, transparent 70%),
+              radial-gradient(ellipse at 80% 80%, rgba(201,168,76,0.05) 0%, transparent 60%);
+  position: relative;
+}
+.hero-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 400;
+  color: var(--text-primary);
+  margin: 0 0 1rem;
+  line-height: 1.1;
+}
+.hero-meta {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+.hero-statement {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  line-height: 1.7;
+}
+.hero-badge {
+  margin-top: 2.5rem;
+  display: inline-flex;
+  gap: 0.75rem;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 0.6rem 1.25rem;
+  border-radius: 30px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--gold);
+}
+
+/* ARCA GRID */
+.arca-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.arca-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.75rem;
+  position: relative;
+  overflow: hidden;
+}
+.arca-letter {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+.arca-name {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+.arca-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.arca-tag {
+  display: inline-block;
+  margin-top: 0.9rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--gold-light);
+  background: rgba(201,168,76,0.1);
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+}
+
+.arca-philosophy {
+  background: var(--bg-elevated);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  padding: 1.5rem 1.75rem;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.arca-philosophy strong { color: var(--text-primary); }
+
+/* METRIC GRID */
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 0 0 3rem;
+}
+.metric-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+.metric-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+.metric-value {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.6rem;
+  color: var(--gold);
+  font-weight: 500;
+}
+.metric-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.chart-container {
+  max-width: 420px;
+  height: 380px;
+  margin: 2rem auto 0;
+  position: relative;
+}
+
+/* ALLOCATION LEGEND TABLE */
+.alloc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2.5rem;
+}
+.alloc-table th {
+  text-align: left;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.alloc-table td {
+  padding: 0.9rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.92rem;
+}
+.alloc-table td:last-child, .alloc-table th:last-child { text-align: right; font-family: 'DM Mono', monospace; }
+.dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:0.6rem; }
+
+/* ASSET BLOCK */
+.asset-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.75rem 1.75rem 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.asset-block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.asset-block-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--gold-light);
+}
+.asset-block-total {
+  font-family: 'DM Mono', monospace;
+  color: var(--gold);
+  font-size: 1.1rem;
+}
+.asset-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+.asset-row:last-child { border-bottom: none; }
+.asset-row-name { color: var(--text-primary); font-weight: 500; }
+.asset-row-pct { color: var(--text-muted); font-size: 0.8rem; margin-left: 0.5rem; }
+.asset-row-value { font-family: 'DM Mono', monospace; color: var(--gold); }
+
+.total-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(30,39,97,0.25));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+  margin-top: 1rem;
+}
+.total-bar-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+}
+.total-bar-value {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.6rem;
+  color: var(--gold);
+}
+
+.note-box {
+  background: rgba(232,168,60,0.08);
+  border: 1px solid rgba(232,168,60,0.25);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 1.5rem;
+}
+.note-box strong { color: var(--warning); }
+
+/* FOOTER */
+.footer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 2rem 3rem;
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+  border: 1px solid var(--border);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+.footer-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text-primary); }
+.footer-title { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem; }
+.footer-brand { font-size: 0.8rem; color: var(--gold); margin-top: 0.5rem; letter-spacing: 0.05em; }
+.footer-disclaimer {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  max-width: 520px;
+  margin: 2rem auto 0;
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  .section { padding: 3rem 1.25rem; }
+  .metric-grid { grid-template-columns: 1fr 1fr; }
+  .arca-grid { grid-template-columns: 1fr; }
+  .chart-container { height: 300px; }
+}
+</style>
+</head>
+<body>
+
+<div id="main-content">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Planejamento Financeiro Pessoal</div>
+    <h1 class="hero-name">Alane &amp; Samuel</h1>
+    <div class="hero-meta">Elaborado por Matheus Melo · Planejador Financeiro Pessoal · Grão | Grupo Primo</div>
+    <p class="hero-statement">
+      Este documento apresenta a metodologia por trás da carteira de vocês e o plano de
+      alocação do novo aporte, seguindo a mesma lógica de diversificação e disciplina que
+      sustenta a estratégia de longo prazo.
+    </p>
+    <div class="hero-badge">Perfil: Carteira Moderada</div>
+  </section>
+
+  <!-- METODOLOGIA ARCA -->
+  <section class="section">
+    <div class="section-label">Metodologia</div>
+    <h2 class="section-title">A Metodologia ARCA</h2>
+    <p class="section-intro">
+      A ARCA é um framework de alocação de patrimônio que organiza os investimentos em
+      quatro grandes classes de ativos. A ideia central é simples: em vez de concentrar
+      tudo em um único tipo de investimento, o patrimônio é distribuído entre pilares com
+      comportamentos diferentes entre si — para que, em qualquer cenário econômico, sempre
+      haja parte da carteira funcionando bem.
+    </p>
+
+    <div class="arca-grid">
+      <div class="arca-card">
+        <div class="arca-letter">A</div>
+        <div class="arca-name">Ações e Negócios</div>
+        <div class="arca-desc">
+          Participação em empresas listadas na bolsa. É a parte da carteira que busca
+          crescimento de patrimônio no longo prazo, acompanhando o desenvolvimento de
+          negócios reais.
+        </div>
+        <div class="arca-tag">Crescimento</div>
+      </div>
+
+      <div class="arca-card">
+        <div class="arca-letter">R</div>
+        <div class="arca-name">Real Estate</div>
+        <div class="arca-desc">
+          Fundos Imobiliários (FIIs), que dão acesso a imóveis comerciais, galpões
+          logísticos e recebíveis do setor. Geram renda mensal através de aluguéis e
+          rendimentos distribuídos.
+        </div>
+        <div class="arca-tag">Renda passiva</div>
+      </div>
+
+      <div class="arca-card">
+        <div class="arca-letter">C</div>
+        <div class="arca-name">Caixa</div>
+        <div class="arca-desc">
+          Renda fixa de baixo risco e alta liquidez, como o Tesouro Selic. É a base de
+          segurança da carteira: protege o patrimônio, garante estabilidade e serve de
+          reserva para oportunidades.
+        </div>
+        <div class="arca-tag">Segurança</div>
+      </div>
+
+      <div class="arca-card">
+        <div class="arca-letter">A</div>
+        <div class="arca-name">Alternativos</div>
+        <div class="arca-desc">
+          Ativos internacionais e não convencionais — exposição a moeda forte, ouro e
+          mercados globais. Protegem o patrimônio de riscos específicos do Brasil e trazem
+          diversificação geográfica.
+        </div>
+        <div class="arca-tag">Diversificação</div>
+      </div>
+    </div>
+
+    <div class="arca-philosophy">
+      <strong>Por que isso importa para vocês:</strong> cada pilar tem um papel diferente.
+      Quando a bolsa brasileira sobe, as Ações puxam o resultado. Quando o Real vale menos,
+      os Alternativos internacionais protegem parte do patrimônio. Quando o mercado fica
+      instável, o Caixa garante liquidez e segurança. O objetivo não é acertar qual classe
+      vai performar melhor — é estar posicionado em todas, na proporção certa para o perfil
+      de vocês.
+    </div>
+  </section>
+
+  <!-- CARTEIRA MODERADA -->
+  <section class="section">
+    <div class="section-label">Perfil de Vocês</div>
+    <h2 class="section-title">Carteira Moderada</h2>
+    <p class="section-intro">
+      Dentro da metodologia ARCA, o perfil Moderado prioriza segurança e liquidez, com
+      espaço relevante para crescimento e diversificação internacional. É a proporção que
+      orienta tanto a carteira atual quanto todo novo aporte.
+    </p>
+
+    <div class="chart-container">
+      <canvas id="allocationChart"></canvas>
+    </div>
+
+    <table class="alloc-table">
+      <thead>
+        <tr><th>Classe (ARCA)</th><th>Peso</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="dot" style="background:#1E2761"></span>Caixa</td><td>60%</td></tr>
+        <tr><td><span class="dot" style="background:#7C6FE0"></span>Ações e Negócios</td><td>15%</td></tr>
+        <tr><td><span class="dot" style="background:#E8A83C"></span>Real Estate</td><td>15%</td></tr>
+        <tr><td><span class="dot" style="background:#4CE0C9"></span>Ativos Internacionais</td><td>10%</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- APORTE -->
+  <section class="section">
+    <div class="section-label">Novo Aporte</div>
+    <h2 class="section-title">Aporte de R$ 5.000,00</h2>
+    <p class="section-intro">
+      Distribuição do aporte seguindo exatamente os pesos da Carteira Moderada, com os
+      ativos específicos de cada classe ponderados proporcionalmente entre si.
+    </p>
+
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="metric-label">Valor do Aporte</div>
+        <div class="metric-value">R$ 5.000</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Perfil</div>
+        <div class="metric-value" style="font-size:1.3rem;">Moderado</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Classes ARCA</div>
+        <div class="metric-value">4</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Ativos no aporte</div>
+        <div class="metric-value">10</div>
+      </div>
+    </div>
+
+    <!-- Caixa -->
+    <div class="asset-block">
+      <div class="asset-block-header">
+        <div class="asset-block-title">C — Caixa</div>
+        <div class="asset-block-total">R$ 3.000,00 · 60%</div>
+      </div>
+      <div class="asset-row">
+        <div><span class="asset-row-name">Tesouro Selic</span><span class="asset-row-pct">60,00%</span></div>
+        <div class="asset-row-value">R$ 3.000,00</div>
+      </div>
+    </div>
+
+    <!-- Ações -->
+    <div class="asset-block">
+      <div class="asset-block-header">
+        <div class="asset-block-title">A — Ações e Negócios</div>
+        <div class="asset-block-total">R$ 750,00 · 15%</div>
+      </div>
+      <div class="asset-row">
+        <div><span class="asset-row-name">PRIO3</span><span class="asset-row-pct">6,00%</span></div>
+        <div class="asset-row-value">R$ 300,00</div>
+      </div>
+      <div class="asset-row">
+        <div><span class="asset-row-name">GMAT3</span><span class="asset-row-pct">5,00%</span></div>
+        <div class="asset-row-value">R$ 250,00</div>
+      </div>
+      <div class="asset-row">
+        <div><span class="asset-row-name">WIZC3</span><span class="asset-row-pct">4,00%</span></div>
+        <div class="asset-row-value">R$ 200,00</div>
+      </div>
+    </div>
+
+    <!-- Real Estate -->
+    <div class="asset-block">
+      <div class="asset-block-header">
+        <div class="asset-block-title">R — Real Estate</div>
+        <div class="asset-block-total">R$ 750,00 · 15%</div>
+      </div>
+      <div class="asset-row">
+        <div><span class="asset-row-name">XPML11</span><span class="asset-row-pct">5,00%</span></div>
+        <div class="asset-row-value">R$ 250,00</div>
+      </div>
+      <div class="asset-row">
+        <div><span class="asset-row-name">CPTS11</span><span class="asset-row-pct">4,00%</span></div>
+        <div class="asset-row-value">R$ 200,00</div>
+      </div>
+      <div class="asset-row">
+        <div><span class="asset-row-name">PSEC11</span><span class="asset-row-pct">3,00%</span></div>
+        <div class="asset-row-value">R$ 150,00</div>
+      </div>
+      <div class="asset-row">
+        <div><span class="asset-row-name">PVBI11</span><span class="asset-row-pct">3,00%</span></div>
+        <div class="asset-row-value">R$ 150,00</div>
+      </div>
+    </div>
+
+    <!-- Alternativos -->
+    <div class="asset-block">
+      <div class="asset-block-header">
+        <div class="asset-block-title">A — Alternativos (Internacionais)</div>
+        <div class="asset-block-total">R$ 500,00 · 10%</div>
+      </div>
+      <div class="asset-row">
+        <div><span class="asset-row-name">WRLD11</span><span class="asset-row-pct">6,50%</span></div>
+        <div class="asset-row-value">R$ 325,00</div>
+      </div>
+      <div class="asset-row">
+        <div><span class="asset-row-name">USDB11</span><span class="asset-row-pct">2,00%</span></div>
+        <div class="asset-row-value">R$ 100,00</div>
+      </div>
+      <div class="asset-row">
+        <div><span class="asset-row-name">GOLD11</span><span class="asset-row-pct">1,50%</span></div>
+        <div class="asset-row-value">R$ 75,00</div>
+      </div>
+    </div>
+
+    <div class="total-bar">
+      <div class="total-bar-label">Total do aporte</div>
+      <div class="total-bar-value">R$ 5.000,00</div>
+    </div>
+
+    <div class="note-box">
+      <strong>Observação:</strong> dentro dos Alternativos, optamos por manter apenas os
+      ativos de exposição internacional (WRLD11, USDB11, GOLD11), mantendo a proporção
+      relativa original entre eles e escalando para ocupar os 10% da classe.
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">MM</div>
+    <div class="footer-name">Matheus Melo</div>
+    <div class="footer-title">Planejador Financeiro Pessoal</div>
+    <div class="footer-brand">Grão | Grupo Primo</div>
+    <div class="footer-disclaimer">
+      Este documento é confidencial e foi elaborado exclusivamente para Alane e Samuel.
+      As recomendações contidas têm caráter fiduciário e são baseadas nas informações
+      coletadas até a data de emissão.
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  function initCharts() {
+    const ctx = document.getElementById('allocationChart');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Caixa', 'Ações e Negócios', 'Real Estate', 'Ativos Internacionais'],
+        datasets: [{
+          data: [60, 15, 15, 10],
+          backgroundColor: ['#1E2761', '#7C6FE0', '#E8A83C', '#4CE0C9'],
+          borderColor: '#0A0C1A',
+          borderWidth: 3,
+          hoverBorderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { color: '#8B8FA8', font: { family: 'DM Sans', size: 13 }, padding: 16 }
+          },
+          tooltip: {
+            callbacks: { label: (ctx) => ` ${ctx.label}: ${ctx.parsed}%` }
+          }
+        },
+        cutout: '65%'
+      }
+    });
+  }
+  document.addEventListener('DOMContentLoaded', initCharts);
+</script>
+</body>
+</html>
